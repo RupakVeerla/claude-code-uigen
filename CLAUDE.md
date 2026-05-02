@@ -23,6 +23,17 @@ npm run db:reset       # Wipe and re-migrate (destructive)
 
 To run a single test file: `npx vitest run src/lib/__tests__/file-system.test.ts`
 
+## Environment
+
+Create a `.env` file at the project root (no `.env.example` exists):
+
+```
+ANTHROPIC_API_KEY=your-key-here   # optional — omit to use MockLanguageModel
+JWT_SECRET=your-secret            # optional — defaults to "development-secret-key"
+```
+
+Dev server runs at `http://localhost:3000`.
+
 ## Architecture
 
 UIGen is an AI-powered React component generator with a live preview. Users describe components in chat; Claude writes code into a **virtual (in-memory) file system**; the result renders instantly in a sandboxed iframe. There is no real file system for user code — everything lives in `VirtualFileSystem` (a `Map`-based tree) and is persisted as JSON in SQLite via Prisma.
